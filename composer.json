@@ -9,13 +9,23 @@
             "email": "michael@karbowiak.dk"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "slim/slim": "^4.8.0",
-        "league/container": "^3.3.5"
+        "league/container": "^3.3.5",
+        "illuminate/collections": "^8.42",
+        "twig/twig": "^3.3",
+        "nyholm/psr7": "^1.4",
+        "nyholm/psr7-server": "^1.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "symfony/var-dumper": "^5.2"
     }
 }
