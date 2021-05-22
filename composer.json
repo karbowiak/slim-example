@@ -1,0 +1,21 @@
+{
+    "name": "karbowiak/slim-example",
+    "description": "Slim framework with league container and autowiring",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Karbowiak",
+            "email": "michael@karbowiak.dk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "slim/slim": "^4.8.0",
+        "league/container": "^3.3.5"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    }
+}
