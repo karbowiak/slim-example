@@ -2,6 +2,7 @@
 
 namespace App\Api;
 
+use App\Helper\PHPSession;
 use App\Helper\Twig;
 use Illuminate\Support\Collection;
 use MongoDB\BSON\UTCDateTime;
@@ -19,6 +20,7 @@ abstract class AbstractController
     protected Collection $arguments;
 
     public function __construct(
+        protected PHPSession $session,
         protected Twig $twig
     ) {
 

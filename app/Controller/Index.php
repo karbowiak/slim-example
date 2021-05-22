@@ -11,6 +11,7 @@ class Index extends AbstractController
     #[UrlAttribute('/helloworld[/{name}]')]
     public function helloworld(?string $name = 'mom'): ResponseInterface
     {
-        return $this->render('helloworld.twig', ['name' => $name]);
+        $isLoggedIn = $this->session->get('isLoggedIn');
+        return $this->render('helloworld.twig', ['name' => $name, 'isLoggedIn' => $isLoggedIn]);
     }
 }
