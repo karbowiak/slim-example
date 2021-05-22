@@ -7,6 +7,9 @@ use Psr\Http\Server\MiddlewareInterface;
 
 [$bootstrap, $autoloader] = require(dirname(__DIR__, 1) . '/app/init.php');
 
+# Load the dotenv
+(\Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1)))->load();
+
 # Get the container
 $container = $bootstrap->getContainer();
 

@@ -17,10 +17,10 @@ class Twig
         $loader = new FilesystemLoader(dirname(__DIR__, 2) . '/templates');
         $this->twig = new Environment($loader, [
             'cache' => dirname(__DIR__, 2) . '/cache',
-            'debug' => true,
-            'auto_reload' => true,
-            'strict_variables' => true,
-            'optimizations' => true
+            'debug' => $_ENV['TWIG_DEBUG'],
+            'auto_reload' => $_ENV['TWIG_AUTO_RELOAD'],
+            'strict_variables' => $_ENV['TWIG_STRICT_VARIABLES'],
+            'optimizations' => $_ENV['TWIG_OPTIMIZATIONS']
         ]);
     }
 
