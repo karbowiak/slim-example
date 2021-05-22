@@ -22,7 +22,8 @@
         "illuminate/collections": "^8.42",
         "twig/twig": "^3.3",
         "nyholm/psr7": "^1.4",
-        "nyholm/psr7-server": "^1.0"
+        "nyholm/psr7-server": "^1.0",
+        "zeuxisoo/slim-whoops": "^0.7.3"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",

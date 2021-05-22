@@ -2,6 +2,9 @@
 
 # Initialize the application
 /** @var \App\Bootstrap $bootstrap */
+
+use Psr\Http\Server\MiddlewareInterface;
+
 [$bootstrap, $autoloader] = require(dirname(__DIR__, 1) . '/app/init.php');
 
 # Get the container
@@ -33,7 +36,14 @@ foreach ($autoloader->getClassMap() as $class => $path) {
     }
 }
 
-# Add middleware loading
+# Add middleware
+foreach ($autoloader->getClassMap() as $class => $path) {
+    if (str_starts_with($class, 'App\\Middleware')) {
+        /** @var MiddlewareInterface $loaded */
+        $loaded = $container->get($class);
+        $app->addMiddleware($loaded);
+    }
+}
 
 # Run the app
 $app->run();
