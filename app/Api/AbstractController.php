@@ -170,31 +170,6 @@ abstract class AbstractController
     }
 
     /**
-     * @param $dateTime
-     *
-     * @return UTCDateTime
-     */
-    protected function makeTimeFromDateTime(string $dateTime): UTCDateTime
-    {
-        $unixTime = strtotime($dateTime);
-        $milliseconds = $unixTime * 1000;
-
-        return new UTCDateTime($milliseconds);
-    }
-
-    /**
-     * @param $unixTime
-     *
-     * @return UTCDateTime
-     */
-    protected function makeTimeFromUnixTime(int $unixTime): UTCDateTime
-    {
-        $milliseconds = $unixTime * 1000;
-
-        return new UTCDateTime($milliseconds);
-    }
-
-    /**
      * Output html data
      *
      * @param string $htmlData

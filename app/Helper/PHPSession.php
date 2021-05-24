@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use JetBrains\PhpStorm\Pure;
+
 class PHPSession
 {
     public function __construct()
@@ -11,6 +13,7 @@ class PHPSession
         }
     }
 
+    #[Pure]
     public function get(string $key): ?string
     {
         return $this->has($key) ? $_SESSION[$key] : null;

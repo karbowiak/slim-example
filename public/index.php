@@ -45,5 +45,8 @@ foreach ($autoloader->getClassMap() as $class => $path) {
     }
 }
 
+# Add whoops
+$app->add(new \Zeuxisoo\Whoops\Slim\WhoopsMiddleware());
+
 # Run the app
 $app->run();
