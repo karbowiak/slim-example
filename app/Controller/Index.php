@@ -8,10 +8,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class Index extends AbstractController
 {
-    #[UrlAttribute('/helloworld[/{name}]')]
-    public function helloworld(?string $name = 'mom'): ResponseInterface
+    #[UrlAttribute('/')]
+    public function helloworld(): ResponseInterface
     {
-        $isLoggedIn = $this->session->get('isLoggedIn');
-        return $this->render('helloworld.twig', ['name' => $name, 'isLoggedIn' => $isLoggedIn]);
+        return $this->render('index.twig');
     }
 }
