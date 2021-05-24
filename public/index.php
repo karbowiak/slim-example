@@ -17,32 +17,30 @@ $psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
 $app = \Slim\Factory\AppFactory::create($psr17Factory, $container);
 
 # Load all the routes
-foreach ($autoloader->getClassMap() as $class => $path) {
-    if (str_starts_with($class, 'App\\Controller')) {
-        try {
-            /** @var \App\Api\AbstractController $loaded */
-            $reflectionClass = new ReflectionClass($class);
-            foreach ($reflectionClass->getMethods() as $method) {
-                $attributes = $method->getAttributes(\App\Attributes\UrlAttribute::class);
-                foreach ($attributes as $attribute) {
-                    $apiUrl = $attribute->newInstance();
-                    $loaded = $container->get($class);
-                    $app->map($apiUrl->getType(), $apiUrl->getRoute(), $loaded($method->getName()));
-                }
+$controllerFinder = new \Kcs\ClassFinder\Finder\ComposerFinder();
+foreach($controllerFinder->inNamespace('App\\Controller') as $class => $reflector) {
+    try {
+        /** @var \App\Api\AbstractController $loaded */
+        $reflectionClass = new ReflectionClass($class);
+        foreach ($reflectionClass->getMethods() as $method) {
+            $attributes = $method->getAttributes(\App\Attributes\UrlAttribute::class);
+            foreach ($attributes as $attribute) {
+                $apiUrl = $attribute->newInstance();
+                $loaded = $container->get($class);
+                $app->map($apiUrl->getType(), $apiUrl->getRoute(), $loaded($method->getName()));
             }
-        } catch (\Throwable $e) {
-            throw new RuntimeException('Error loading controller: ' . $e->getMessage());
         }
+    } catch (\Throwable $e) {
+        throw new RuntimeException('Error loading controller: ' . $e->getMessage());
     }
 }
 
 # Add middleware
-foreach ($autoloader->getClassMap() as $class => $path) {
-    if (str_starts_with($class, 'App\\Middleware')) {
-        /** @var \Psr\Http\Server\MiddlewareInterface $loaded */
-        $loaded = $container->get($class);
-        $app->addMiddleware($loaded);
-    }
+$middlewareFinder = new \Kcs\ClassFinder\Finder\ComposerFinder();
+foreach($middlewareFinder->inNamespace('App\\Middleware') as $class => $reflector) {
+    /** @var \Psr\Http\Server\MiddlewareInterface $loaded */
+    $loaded = $container->get($class);
+    $app->addMiddleware($loaded);
 }
 
 # Add whoops
